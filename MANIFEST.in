@@ -1,0 +1,2 @@
+recursive-include src/scikit_build_core/_vendor *
+recursive-include src/scikit_build_core/resources *

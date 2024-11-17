@@ -31,7 +31,6 @@ MANIFEST
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
-*.spec
 
 # Installer logs
 pip-log.txt
@@ -138,9 +137,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# setuptools_scm
-src/*/_version.py
-
 # SKBuild cache dir
 _skbuild/
 
@@ -173,3 +169,5 @@ Thumbs.db
 
 /docs/**/build
 .vscode/
+
+.pybuild/

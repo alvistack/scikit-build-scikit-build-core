@@ -1,0 +1,133 @@
+# -*- coding: utf-8 -*-
+from setuptools import setup
+
+setup(
+    name='scikit-build-core',
+    version='0.10.7',
+    description='Build backend for CMake based projects',
+    author_email='Henry Schreiner <henryfs@princeton.edu>',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Software Development :: Build Tools',
+        'Typing :: Typed',
+    ],
+    install_requires=[
+        'exceptiongroup>=1.0; python_version < "3.11"',
+        'importlib-metadata>=4.13; python_version < "3.8"',
+        'importlib-resources>=1.3; python_version < "3.9"',
+        'packaging>=21.3',
+        'pathspec>=0.10.1',
+        'tomli>=1.2.2; python_version < "3.11"',
+        'typing-extensions>=3.10.0; python_version < "3.9"',
+    ],
+    extras_require={
+        'cov': [
+            'pytest-cov[toml]',
+        ],
+        'dev': [
+            'rich',
+        ],
+        'docs': [
+            'furo',
+            'hatchling',
+            'myst-parser>=0.13',
+            'setuptools',
+            'sphinx-autodoc-typehints',
+            'sphinx-copybutton',
+            'sphinx-inline-tabs',
+            'sphinx-jsonschema',
+            'sphinx>=7.0',
+        ],
+        'test': [
+            'build>=0.8',
+            'cattrs>=22.2.0',
+            'pip>=23; python_version < "3.13"',
+            'pip>=24.1; python_version >= "3.13"',
+            'pybind11>=2.11',
+            'pytest-subprocess>=1.5',
+            'pytest>=7.0',
+            'setuptools>=43; python_version < "3.9"',
+            'setuptools>=45; python_version == "3.9"',
+            'setuptools>=49; python_version >= "3.10" and python_version < "3.12"',
+            'setuptools>=66.1; python_version >= "3.12"',
+            'virtualenv>=20.20',
+            'wheel>=0.40',
+        ],
+        'test-hatchling': [
+            'hatchling>=1.24.0',
+        ],
+        'test-meta': [
+            'hatch-fancy-pypi-readme>=22.3',
+            'setuptools-scm',
+        ],
+        'test-numpy': [
+            'numpy; python_version < "3.13" and platform_python_implementation != "PyPy"',
+            'numpy~=1.21.0; python_version == "3.7" and platform_python_implementation == "PyPy" and sys_platform == "linux"',
+            'numpy~=1.24.0; python_version == "3.8" and platform_python_implementation == "PyPy"',
+            'numpy~=2.0.0; python_version == "3.9" and platform_python_implementation == "PyPy"',
+        ],
+        'test-schema': [
+            'fastjsonschema',
+            'validate-pyproject',
+        ],
+        'wheel-free-setuptools': [
+            'setuptools>=70.1; python_version >= "3.8"',
+        ],
+        'wheels': [
+            'cmake',
+            'ninja; sys_platform != "win32"',
+        ],
+    },
+    entry_points={
+        'distutils.commands': [
+            'build_cmake = scikit_build_core.setuptools.build_cmake:BuildCMake',
+        ],
+        'distutils.setup_keywords': [
+            'cmake_args = scikit_build_core.setuptools.build_cmake:cmake_args',
+            'cmake_source_dir = scikit_build_core.setuptools.build_cmake:cmake_source_dir',
+        ],
+        'hatch': [
+            'scikit-build = scikit_build_core.hatch.hooks',
+        ],
+        'setuptools.finalize_distribution_options': [
+            'scikit_build_entry = scikit_build_core.setuptools.build_cmake:finalize_distribution_options',
+        ],
+        'validate_pyproject.tool_schema': [
+            'scikit-build = scikit_build_core.settings.skbuild_schema:get_skbuild_schema',
+        ],
+    },
+    packages=[
+        'scikit_build_core',
+        'scikit_build_core._compat',
+        'scikit_build_core._compat.importlib',
+        'scikit_build_core._vendor.pyproject_metadata',
+        'scikit_build_core.ast',
+        'scikit_build_core.build',
+        'scikit_build_core.builder',
+        'scikit_build_core.file_api',
+        'scikit_build_core.file_api.model',
+        'scikit_build_core.hatch',
+        'scikit_build_core.metadata',
+        'scikit_build_core.resources',
+        'scikit_build_core.resources.find_python',
+        'scikit_build_core.settings',
+        'scikit_build_core.setuptools',
+    ],
+    package_dir={'': 'src'},
+    include_package_data=True,
+)
